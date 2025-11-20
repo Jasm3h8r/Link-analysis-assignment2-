@@ -1,126 +1,25 @@
-﻿# Link-analysis-assignment2-
-Overview
+# Link-analysis-assignment2
 
-This project implements and compares two fundamental link-analysis algorithms: PageRank and HITS (Hyperlink-Induced Topic Search). Both algorithms measure the importance of nodes in a directed graph, but they do so using different approaches. This project allows you to build a graph, visualize it, run the algorithms, and observe how the scores differ.
+## Overview
+This project implements and compares two fundamental link-analysis algorithms: **PageRank** and **HITS (Hyperlink-Induced Topic Search)**. Both algorithms measure the importance of nodes in a directed graph, but they use different approaches. This project allows you to build a graph, visualize it, run the algorithms, and observe how the scores differ.
 
-PageRank Algorithm
-Purpose
+---
 
+## PageRank Algorithm
+
+### Purpose
 PageRank assigns a single importance score to each node based on the structure of incoming links.
 
-How It Works (Simplified)
+### How It Works
+- All nodes start with equal rank.
+- At each iteration:
+  - A node distributes its rank equally among all nodes it links to.
+  - A fraction of the rank (teleportation) is distributed uniformly to all nodes.
+- The process repeats until the scores converge.
 
-All nodes start with equal rank.
+### Damping Factor
+If the damping factor is **n**, the teleportation probability becomes **1 − n**.
 
-At each iteration:
-
-A node distributes its rank equally among the nodes it links to.
-
-A fraction of the rank (teleportation) is distributed uniformly to all nodes.
-
-This process repeats until the values converge.
-
-Damping Factor
-
-If the damping factor is n, the teleportation probability is 1 - n.
-
-PageRank Update Formula
-
+### Update Formula
+```text
 PR(i) = n * Σ(PR(j) / outdegree(j)) + (1 - n) / N
-where:
-
-n = damping factor
-
-N = total number of nodes
-
-j iterates over all nodes linking to node i
-
-HITS Algorithm
-Purpose
-
-HITS computes two complementary scores for each node:
-
-Authority score
-
-Hub score
-
-How It Works (Simplified)
-
-Initialize all hub and authority scores to 1.
-
-Repeat the following steps until convergence:
-
-Authority score of a node = sum of hub scores of all nodes that point to it.
-
-Hub score of a node = sum of authority scores of all nodes it points to.
-
-Normalize both scores after each iteration.
-
-Interpretation
-
-A good authority is pointed to by many good hubs.
-
-A good hub points to many good authorities.
-
-Differences Between PageRank and HITS
-Aspect	PageRank	HITS
-Output	One score per node	Two scores per node (hub and authority)
-Teleportation	Yes	No
-Dangling Node Handling	Built-in	Requires preprocessing
-Best Used For	General ranking	Topic-specific analysis
-Inputs Required
-
-Number of nodes
-
-Directed edges
-
-Damping factor (for PageRank)
-
-Number of iterations or convergence threshold
-
-Outputs Generated
-
-PageRank scores for each node
-
-HITS authority and hub scores
-
-Graph visualization
-
-Optional comparison tables or plots
-
-Execution Summary
-PageRank Steps
-
-Initialize PR = 1/N
-
-Update ranks using link contributions + teleportation
-
-Repeat until convergence
-
-Output the final PageRank vector
-
-HITS Steps
-
-Initialize hub and authority scores
-
-Update authority scores using incoming hubs
-
-Update hub scores using outgoing authorities
-
-Normalize
-
-Repeat until convergence
-
-Output final hub and authority scores
-
-Applications
-
-Ranking webpages
-
-Social network analysis
-
-Recommendation systems
-
-Citation networks
-
-Structural graph analysis
